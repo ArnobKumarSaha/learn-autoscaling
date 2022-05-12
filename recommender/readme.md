@@ -1,0 +1,1 @@
+I have analyzed https://github.com/kubernetes/autoscaler/tree/master/vertical-pod-autoscaler/pkg/recommender package here. And noted down its skeleton.
