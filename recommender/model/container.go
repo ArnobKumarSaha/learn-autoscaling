@@ -38,3 +38,55 @@ type ContainerState struct {
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+func NewContainerState(request Resources, aggregator ContainerStateAggregator) *ContainerState {
+	return nil
+}
+
+func (sample *ContainerUsageSample) isValid(expectedResource ResourceName) bool {
+	// check if this sample is for our expected resource-type, & its usage is calculated
+	return false
+}
+
+func (container *ContainerState) AddSample(sample *ContainerUsageSample) bool {
+	// calls either addCPUSample() or addMemorySample() based on sample's resource type
+	return false
+}
+
+func (container *ContainerState) addCPUSample(sample *ContainerUsageSample) bool {
+	// Discard invalid, duplicate or out-of-order samples.
+	// observeQualityMetrics()
+	// container.aggregator.AddSample(sample)
+	return false
+}
+
+func (container *ContainerState) addMemorySample(sample *ContainerUsageSample, isOOM bool) bool {
+	// ach container aggregates one peak per aggregation interval
+	// If the timestamp of the current sample is earlier than the end of the current interval (WindowEnd):
+	//   if current sample is larger the current peak : remove the old one, add current one
+	// otherwise, add a new interval
+	//
+	// observeQualityMetrics()
+	// adding a sample means , calling container.aggregator.addSample()
+	return false
+}
+
+func (container *ContainerState) GetMaxMemoryPeak() ResourceAmount {
+	// return max of memoryPeak & oomPeak of the container
+	return 0
+}
+
+func (container *ContainerState) RecordOOM(timestamp time.Time, requestedMemory ResourceAmount) error {
+	// discard old oom
+	// call addMemorySample() with isOOM true
+	return nil
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// These are the main functions to look :
+/*
+>> called from model/cluster.go
+AddSample
+RecordOOM
+*/

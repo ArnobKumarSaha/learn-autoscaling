@@ -69,5 +69,127 @@ type ContainerStateAggregatorProxy struct {
 }
 
 // AggregateContainerState & ContainerStateAggregatorProxy both implements ContainerStateAggregator interface
+// calls from container.go first comes to the Proxy then the Proxy calls AggregateContainerState's methods
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// simple getters ::
+
+func (a *AggregateContainerState) GetLastRecommendation() corev1.ResourceList {
+	return a.LastRecommendation
+}
+
+func (a *AggregateContainerState) NeedsRecommendation() bool {
+	return a.IsUnderVPA && a.ScalingMode != nil && *a.ScalingMode != vpa_types.ContainerScalingModeOff
+}
+
+func (a *AggregateContainerState) GetUpdateMode() *vpa_types.UpdateMode {
+	return a.UpdateMode
+}
+
+func (a *AggregateContainerState) GetScalingMode() *vpa_types.ContainerScalingMode {
+	return a.ScalingMode
+}
+
+func (a *AggregateContainerState) GetControlledResources() []ResourceName {
+	if a.ControlledResources != nil {
+		return *a.ControlledResources
+	}
+	return []ResourceName{ResourceCPU, ResourceMemory}
+}
+
+// actual functions ::
+
+func (a *AggregateContainerState) MarkNotAutoscaled() {
+	// set IsUnderVPA, LastRecommendation, UpdateMode, ScalingMode, ControlledResources = nil
+}
+
+func (a *AggregateContainerState) MergeContainerState(other *AggregateContainerState) {
+	// calls historam.Merge() function for CPU & Memory
+	// set FirstSampleStart, LastSampleStart, TotalSamplesCount
+}
+
+func NewAggregateContainerState() *AggregateContainerState {
+	return nil
+}
+
+func (a *AggregateContainerState) AddSample(sample *ContainerUsageSample) {
+	// if resource is CPU, calls addCPUSample()
+	// if memory , calls historam.AddSample()
+}
+
+func (a *AggregateContainerState) SubtractSample(sample *ContainerUsageSample) {
+	// similar to AddSample, but
+	// if CPU resource substracting is not possible yet
+}
+
+func (a *AggregateContainerState) addCPUSample(sample *ContainerUsageSample) {
+	// calls histogram.AddSample
+	// set FirstSampleStart, LastSampleStart, TotalSamplesCount
+}
+
+func (a *AggregateContainerState) SaveToCheckpoint() (*vpa_types.VerticalPodAutoscalerCheckpointStatus, error) {
+	// histogram.SaveToCheckpoint()
+	// return the VPACheckpointStatus object
+	return nil, nil
+}
+
+func (a *AggregateContainerState) LoadFromCheckpoint(checkpoint *vpa_types.VerticalPodAutoscalerCheckpointStatus) error {
+	// Set AggregateContainerState's fields from checkpoint fields
+	// histogram.LoadFromCheckpoint()
+	return nil
+}
+
+func (a *AggregateContainerState) isExpired(now time.Time) bool {
+	// check if the diff between now & lastSampleStart is <= AggregationWindowLength
+	return false
+}
+
+func (a *AggregateContainerState) isEmpty() bool {
+	// check if TotalSamplesCount == 0
+	return false
+}
+
+func (a *AggregateContainerState) UpdateFromPolicy(resourcePolicy *vpa_types.ContainerResourcePolicy) {
+	// updates containerState's scaling mode and controlledResources based on resourcePolicy of the VPA
+}
+
+func AggregateStateByContainerName(aggregateContainerStateMap aggregateContainerStatesMap) ContainerNameToAggregateStateMap {
+	// converts a map[AggregateStateKey]*AggregateContainerState to map[containerName]*AggregateContainerState
+	// by grouping them by the container name
+	return nil
+}
+
+// methods of ContainerStateAggregatorProxy
+// it has all the methods of ContainerStateAggregator interface, as it implements that.
+
+// each of the methods has same structure like below:
+/*
+func (p *ContainerStateAggregatorProxy) AddSample(sample *ContainerUsageSample) {
+	aggregator := p.cluster.findOrCreateAggregateContainerState(p.containerID)
+	aggregator.AddSample(sample)
+}
+*/
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// These are the main functions to look :
+/*
+>> called from model/container.go
+AddSample
+SubtractSample
+GetLastRecommendation
+NeedsRecommendation
+GetUpdateMode
+
+>> called from model/vpa.go
+UpdateFromPolicy
+MarkNotAutoscaled
+MergeContainerState
+
+>> called from input/cluster_feeder.go
+LoadFromCheckpoint
+
+>> called from checkpoint/checkpoint_writer.go
+SaveToCheckpoint
+*/

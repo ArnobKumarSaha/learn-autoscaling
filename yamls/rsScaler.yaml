@@ -7,8 +7,7 @@ spec:
   databaseRef:
     name: mg-rs
   compute:
-    # replicaSet:
-    standalone:
+    replicaSet:
       trigger: "On"
       podLifeTimeThreshold: 5m
       minAllowed:
