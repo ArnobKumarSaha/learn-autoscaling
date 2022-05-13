@@ -1,5 +1,7 @@
 package model
 
+import apiv1 "k8s.io/api/core/v1"
+
 // ResourceName represents the name of the resource monitored by recommender.
 type ResourceName string
 
@@ -20,7 +22,6 @@ const (
 	// MaxResourceAmount is the maximum allowed value of resource amount.
 	MaxResourceAmount = ResourceAmount(1e14)
 )
-
 
 // PodID contains information needed to identify a Pod within a cluster.
 type PodID struct {
@@ -44,3 +45,10 @@ type VpaID struct {
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// some conversion functions among  ResourceAmount, resource.Quantity & int64
+
+func ResourcesAsResourceList(resources Resources) apiv1.ResourceList {
+	// converts Resource to ResourceList
+	return nil
+}

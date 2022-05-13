@@ -49,3 +49,102 @@ type Vpa struct {
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+func (conditionsMap *vpaConditionsMap) Set(conditionType vpa_types.VerticalPodAutoscalerConditionType, status bool, reason string, message string) *vpaConditionsMap {
+	// just set a condition in vpa.Status
+	return nil
+}
+
+func (conditionsMap *vpaConditionsMap) AsList() []vpa_types.VerticalPodAutoscalerCondition {
+	// return a sorted list of conditions
+	return nil
+}
+
+func (conditionsMap *vpaConditionsMap) ConditionActive(conditionType vpa_types.VerticalPodAutoscalerConditionType) bool {
+	// check if the status of conditionType is true
+	return false
+}
+
+func NewVpa(id VpaID, selector labels.Selector, created time.Time) *Vpa {
+	return nil
+}
+
+func (vpa *Vpa) UseAggregationIfMatching(aggregationKey AggregateStateKey, aggregation *AggregateContainerState) {
+	// check if this given aggregation matches this VPA
+	// if yes, add it. < vpa.aggregateContainerStates[aggregationKey] = aggregation >
+}
+
+func (vpa *Vpa) UsesAggregation(aggregationKey AggregateStateKey) bool {
+	// returns true iff an aggregation with the given key contributes to the VPA.
+	return false
+}
+
+func (vpa *Vpa) matchesAggregation(aggregationKey AggregateStateKey) bool {
+	// returns true iff the VPA matches the given aggregation key.
+	return false
+}
+
+func (vpa *Vpa) DeleteAggregation(aggregationKey AggregateStateKey) {
+	// state.MarkNotAutoscaled()
+	// delete that from vpa.aggregateContainerStates
+}
+
+func (vpa *Vpa) UpdateRecommendation(recommendation *vpa_types.RecommendedPodResources) {
+	// metrics_quality.ObserveRecommendationChange for each of containerRecommendations
+	// vpa.Recommendation = recommendation
+}
+
+func (vpa *Vpa) HasRecommendation() bool {
+	// if the VPA object contains any recommendation
+	return false
+}
+
+func (vpa *Vpa) AggregateStateByContainerName() ContainerNameToAggregateStateMap {
+	// calls AggregateStateByContainerName func from aggregate_container_state.go
+	// vpa.MergeCheckpointedState()
+	return nil
+}
+
+func (vpa *Vpa) MergeCheckpointedState(aggregateContainerStateMap ContainerNameToAggregateStateMap) {
+	// merge vpa.ContainersInitialAggregateState with the given parameter
+}
+
+func (vpa *Vpa) SetResourcePolicy(resourcePolicy *vpa_types.PodResourcePolicy) {
+	// update vpa.ResourcePolicy
+	// calls AggregateContainerState's UpdateFromPolicy()
+}
+
+func (vpa *Vpa) SetUpdateMode(updatePolicy *vpa_types.PodUpdatePolicy) {
+	// update vpa.UpdateMode & AggregateContainerState's UpdateMode
+}
+
+func (vpa *Vpa) UpdateConditions(podsMatched bool) {
+	// set podsMatched condition & RecommendationProvided condition in the vpa status
+}
+
+func (vpa *Vpa) AsStatus() *vpa_types.VerticalPodAutoscalerStatus {
+	// returns the vpaStatus, made from the vpa struct
+	return nil
+}
+
+func (vpa *Vpa) HasMatchedPods() bool {
+	// checks if any matching pods found for this vpa
+	return false
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// These are the main functions to look :
+/*
+>> called from model/cluster.go
+UseAggregationIfMatching
+SetResourcePolicy
+
+>> called from routines/recommender.go
+UpdateRecommendation
+HasRecommendation
+UpdateConditions
+
+>> called from checkpoint/checkpoint_writer.go
+AggregateStateByContainerName
+*/
