@@ -49,3 +49,13 @@ type controllerCacheStorage struct {
 	jitterFactor float64
 	lifeTime     time.Duration
 }
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+/*
+controllerCacheStorage has six methods :
+Get, Refresh, Insert, RemoveExpired, GetKeysToRefresh, newControllerCacheStorage
+
+All of them are called from controller_fetcher.go internally
+that's why, I am not going into details
+*/

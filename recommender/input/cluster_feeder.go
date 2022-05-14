@@ -1,6 +1,7 @@
 package input
 
 import (
+	"k8s.io/apimachinery/pkg/labels"
 	vpa_types "k8s.io/autoscaler/vertical-pod-autoscaler/pkg/apis/autoscaling.k8s.io/v1"
 	corev1 "k8s.io/client-go/kubernetes/typed/core/v1"
 	"k8s.io/client-go/rest"
@@ -112,3 +113,66 @@ func (feeder *clusterStateFeeder) GarbageCollectCheckpoints() {
 	// feeder.leadVPAs()
 	// For all the checkpoints, if its referred VPA doesn't exist in feeder.clusterState.Vpas, delete that
 }
+
+func (feeder *clusterStateFeeder) LoadVPAs() {
+	// for all the VPAs :
+	// getSelector(), try clusterState.AddOrUpdateVPA
+	// if successful, update feeder.clusterState.Vpas[vpaID].Conditions accordingly
+	//
+	// call feeder.clusterState.DeleteVpa if previous AddOrUpdate was unsuccessful
+}
+
+func filterVPAs(feeder *clusterStateFeeder, allVpaCRDs []*vpa_types.VerticalPodAutoscaler) []*vpa_types.VerticalPodAutoscaler {
+	// Filter VPA objects whose specified recommender names are not 'default'
+	// implicitDefaultRecommender & selectsRecommender are the two utility called from here
+	return nil
+}
+
+func (feeder *clusterStateFeeder) getSelector(vpa *vpa_types.VerticalPodAutoscaler) (labels.Selector, []condition) {
+	// fetch vpa selector
+	// validateTargetRef()
+	// return selector & condition based on the validation result
+	return nil, nil
+}
+
+func (feeder *clusterStateFeeder) validateTargetRef(vpa *vpa_types.VerticalPodAutoscaler) (bool, condition) {
+	// checks if vpa.Spec.TargetRef is the topLevel controller(who doesn't have any controller) or not
+	return false, condition{}
+}
+
+func (feeder *clusterStateFeeder) LoadPods() {
+	// call feeder.clusterState.DeletePod if a pod doesn't exist
+	// try AddOrUpdatePod & AddOrUpdateContainer for the pods & containers if matchesVPA() returns true
+}
+
+func (feeder *clusterStateFeeder) matchesVPA(pod *spec.BasicPodSpec) bool {
+	// check if this pod matches any of the VPAs
+	return false
+}
+
+func (feeder *clusterStateFeeder) LoadRealTimeMetrics() {
+	// for each of the resourceSample<cpu,memory> of all the ContainerMetrics :
+	// try feeder.clusterState.AddSample
+	// call feeder.clusterState.RecordOOM in a for-select loop
+	// call metrics_recommender.RecordAggregateContainerStatesCount()
+}
+
+func newContainerUsageSamplesWithKey(metrics *metrics.ContainerMetricsSnapshot) []*model.ContainerUsageSampleWithKey {
+	// changes the metrics format to 'ContainerUsageSample' format <of container.go>
+	return nil
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// These are the main functions to look :
+/*
+>> called from main.go
+InitFromHistoryProvider
+InitFromCheckpoints
+
+>> called from routines/recommender.go
+LoadVPAs
+LoadPods
+GarbageCollectCheckpoints
+LoadRealTimeMetrics
+*/

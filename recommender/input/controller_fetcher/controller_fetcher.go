@@ -33,3 +33,13 @@ type controllerFetcher struct {
 	informersMap                 map[wellKnownController]cache.SharedIndexInformer
 	scaleSubresourceCacheStorage controllerCacheStorage
 }
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+/*
+Only two methods are exported from this file, they are called from cluster_feeder.
+NewControllerFetcher
+FindTopMostWellKnownOrScalable
+
+Going into details seems not necessary
+*/
