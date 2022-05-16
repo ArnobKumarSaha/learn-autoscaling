@@ -101,7 +101,7 @@ func (h *histogram) Merge(other Histogram) {
 
 func (h *histogram) Percentile(percentile float64) float64 {
 	// threshold := percentile * h.totalWeight
-	// return the min bucketStart point, upto where the cumulative sum of weights is less than the threshold
+	// return the max bucketStart point, upto where the cumulative sum of weights is less than the threshold
 	return 0
 }
 

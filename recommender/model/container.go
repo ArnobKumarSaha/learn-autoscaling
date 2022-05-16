@@ -1,6 +1,9 @@
 package model
 
-import "time"
+import (
+	corev1 "k8s.io/api/core/v1"
+	"time"
+)
 
 // ContainerUsageSample is a measure of resource usage of a container over some
 // interval.
@@ -61,7 +64,7 @@ func (container *ContainerState) addCPUSample(sample *ContainerUsageSample) bool
 }
 
 func (container *ContainerState) addMemorySample(sample *ContainerUsageSample, isOOM bool) bool {
-	// ach container aggregates one peak per aggregation interval
+	// each container aggregates one peak per aggregation interval
 	// If the timestamp of the current sample is earlier than the end of the current interval (WindowEnd):
 	//   if current sample is larger the current peak : remove the old one, add current one
 	// otherwise, add a new interval
@@ -80,6 +83,11 @@ func (container *ContainerState) RecordOOM(timestamp time.Time, requestedMemory 
 	// discard old oom
 	// call addMemorySample() with isOOM true
 	return nil
+}
+
+func (container *ContainerState) observeQualityMetrics(usage ResourceAmount, isOOM bool, resource corev1.ResourceName) {
+	// if there is no recommendation, or if recommended resource is 0, metrics_quality.ObserveQualityMetricsRecommendationMissing() & return
+	// else metrics_quality.ObserveQualityMetrics()
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

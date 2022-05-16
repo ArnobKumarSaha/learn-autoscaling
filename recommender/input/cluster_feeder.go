@@ -93,14 +93,14 @@ func NewClusterStateFeeder(config *rest.Config, clusterState *model.ClusterState
 }
 
 func (feeder *clusterStateFeeder) InitFromHistoryProvider(historyProvider history.HistoryProvider) {
-	// get the cluster history
+	// get the cluster history using historyProvider
 	// run feeder.ClusterState's AddOrUpdatePod for all pods of clusterHistory
 	// run feeder.ClusterState's AddOrUpdateContainer for all pods of clusterHistory
 	// run feeder.ClusterState's AddSample for all the container samples
 }
 
 func (feeder *clusterStateFeeder) InitFromCheckpoints() {
-	// feeder.leadVPAs()
+	// feeder.loadVPAs()
 	// feeder.setVpaCheckpoint() for all the vpa checkpoints
 }
 
@@ -110,7 +110,7 @@ func (feeder *clusterStateFeeder) setVpaCheckpoint(checkpoint *vpa_types.Vertica
 }
 
 func (feeder *clusterStateFeeder) GarbageCollectCheckpoints() {
-	// feeder.leadVPAs()
+	// feeder.loadVPAs()
 	// For all the checkpoints, if its referred VPA doesn't exist in feeder.clusterState.Vpas, delete that
 }
 
@@ -142,7 +142,7 @@ func (feeder *clusterStateFeeder) validateTargetRef(vpa *vpa_types.VerticalPodAu
 
 func (feeder *clusterStateFeeder) LoadPods() {
 	// call feeder.clusterState.DeletePod if a pod doesn't exist
-	// try AddOrUpdatePod & AddOrUpdateContainer for the pods & containers if matchesVPA() returns true
+	// try cluster.AddOrUpdatePod & AddOrUpdateContainer for the pods & containers if matchesVPA() returns true
 }
 
 func (feeder *clusterStateFeeder) matchesVPA(pod *spec.BasicPodSpec) bool {
