@@ -1,0 +1,59 @@
+apiVersion: kubedb.com/v1alpha2
+kind: MongoDB
+metadata:
+  name: mg-sh
+  namespace: demo
+spec:
+  version: "percona-4.4.10"
+  storageEngine: inMemory
+  shardTopology:
+    configServer:
+      replicas: 3
+      podTemplate:
+        spec:
+          resources:
+            requests:
+              cpu: "400m"
+              memory: "10Mi"
+            limits:
+              cpu: "4"
+              memory: "4Gi"
+    mongos:
+      replicas: 2
+      podTemplate:
+        spec:
+          resources:
+            requests:
+              cpu: "300m"
+              memory: "10Mi"
+            limits:
+              cpu: "1"
+              memory: "1Gi"
+    shard:
+      configSecret:
+        name: shard-config
+      replicas: 3
+      shards: 2
+      podTemplate:
+        spec:
+          resources:
+            requests:
+              cpu: "400m"
+              memory: "1Gi"
+            limits:
+              cpu: "4"
+              memory: "2Gi"
+  storageType: Ephemeral
+  monitor:
+    agent: prometheus.io/operator
+    prometheus:
+      exporter:
+        args:
+          - --compatible-mode
+      serviceMonitor:
+        labels:
+          release: prometheus
+        interval: 10s
+  terminationPolicy: WipeOut
+
+# kubectl create secret generic -n demo shard-config --from-file=./shard-config
