@@ -17,8 +17,8 @@ spec:
         limits:
           cpu: "4"
           memory: "2Gi"
-  configSecret:
-    name: shard-config
+#  configSecret:
+#    name: inmemory-config
   storageEngine: inMemory
   storageType: Ephemeral
   monitor:
@@ -33,4 +33,5 @@ spec:
         interval: 10s
   terminationPolicy: WipeOut
 
-# kubectl create secret generic -n demo shard-config --from-file=./shard-config
+# The name has to be mongod.conf
+# kubectl create secret generic -n demo inmemory-config --from-file=./others/mongod.conf

@@ -119,3 +119,26 @@ GetClusterHistory ia called from cluster_feeder.go
 |                     |-- getPodIDFromLabels
 |                     |-- getPodLabelsMap
 */
+
+/*
+Some words on the structs of "github.com/prometheus/common/model" value.go
+Metric -> map[string]string
+
+SampleValue -> float
+SamplePair -> SampleValue + Time
+Scalar -> SampleValue + Time
+
+Sample -> SampleValue + Time + Metric
+Samples -> []Sample
+Vector -> []Sample
+
+SampleStream -> Metric + []SamplePair
+Matrix -> []SampleStream
+*/
+
+/*
+How a `Matrix` converts to `map[model.PodID]*PodHistory` ?
+PodId comes from 'Metric' part of Matrix.  using these key (from `Metric` map) : CtrNamespaceLabel, CtrPodNameLabel, CtrNameLabel
+PodHistory comes from `[]SamplePair` part of Matrix.
+	Each of the SamplePair converts to each of the ContainerUsageSample in PodHistory
+*/

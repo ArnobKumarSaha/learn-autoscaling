@@ -31,7 +31,7 @@ spec:
               memory: "1Gi"
     shard:
       configSecret:
-        name: shard-config
+        name: inmemory-config
       replicas: 3
       shards: 2
       podTemplate:
@@ -56,4 +56,4 @@ spec:
         interval: 10s
   terminationPolicy: WipeOut
 
-# kubectl create secret generic -n demo shard-config --from-file=./shard-config
+# kubectl create secret generic -n demo inmemory-config --from-file=./inmemory-config
