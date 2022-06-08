@@ -1,0 +1,20 @@
+apiVersion: autoscaling.kubedb.com/v1alpha1
+kind: ElasticsearchAutoscaler
+metadata:
+  name: es-topology-as
+  namespace: demo
+spec:
+  databaseRef:
+    name: es-topology
+  compute:
+    topology:
+      ingest:
+        trigger: "On"
+        podLifeTimeThreshold: 5m
+        minAllowed:
+          cpu: ".8"
+          memory: 2Gi
+        maxAllowed:
+          cpu: 2
+          memory: 3Gi
+        controlledResources: ["cpu", "memory"]

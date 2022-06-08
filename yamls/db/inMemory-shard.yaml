@@ -13,11 +13,11 @@ spec:
         spec:
           resources:
             requests:
-              cpu: "400m"
-              memory: "10Mi"
+              cpu: "300m"
+              memory: "100Mi"
             limits:
-              cpu: "4"
-              memory: "4Gi"
+              cpu: "1"
+              memory: "1Gi"
     mongos:
       replicas: 2
       podTemplate:
@@ -25,7 +25,7 @@ spec:
           resources:
             requests:
               cpu: "300m"
-              memory: "10Mi"
+              memory: "100Mi"
             limits:
               cpu: "1"
               memory: "1Gi"
@@ -38,7 +38,7 @@ spec:
         spec:
           resources:
             requests:
-              cpu: "400m"
+              cpu: "700m"
               memory: "1Gi"
             limits:
               cpu: "4"

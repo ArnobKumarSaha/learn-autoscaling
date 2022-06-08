@@ -1,0 +1,26 @@
+apiVersion: kubedb.com/v1alpha2
+kind: Elasticsearch
+metadata:
+  name: es-combined
+  namespace: demo
+spec:
+  enableSSL: true
+  version: xpack-7.8.0-v1
+  storageType: Durable
+  replicas: 3
+  storage:
+    storageClassName: "standard"
+    accessModes:
+      - ReadWriteOnce
+    resources:
+      requests:
+        storage: 1Gi
+  terminationPolicy: WipeOut
+
+#&{[{elasticsearch
+#     map[cpu:{{400 -3} {<nil>} 400m DecimalSI} memory:{{1073741824 0} {<nil>} 1Gi BinarySI}]
+#     map[cpu:{{400 -3} {<nil>} 400m DecimalSI} memory:{{1073741824 0} {<nil>} 1Gi BinarySI}]
+#     map[cpu:{{2 0} {<nil>} 2 DecimalSI} memory:{{3221225472 0} {<nil>} 3Gi BinarySI}]
+#     map[cpu:{{25 -3} {<nil>} 25m DecimalSI} memory:{{978270031 0} {<nil>} 978270031 DecimalSI}]}]}
+#
+#{false false 0.2 map[cpu:500 memory:1073741824000]}
