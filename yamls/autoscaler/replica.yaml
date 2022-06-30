@@ -16,4 +16,6 @@ spec:
       maxAllowed:
         cpu: 1
         memory: 1Gi
-      controlledResources: ["cpu", "memory"]
+#      controlledResources: ["cpu", "memory"]
+#      usageThreshold: 70
+#      scalingThreshold: 50

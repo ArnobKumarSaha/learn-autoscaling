@@ -1,0 +1,130 @@
+mg-rs mg-as-rs MongoDBAutoscaler
+I0621 12:52:36.787204       1 cluster_feeder.go:353] Start selecting the vpaCRDs.
+I0621 12:52:36.787208       1 cluster_feeder.go:376] Fetched 1 VPAs.
+I0621 12:52:36.799445       1 cluster_feeder.go:387] Using selector app.kubernetes.io/instance=mg-rs,app.kubernetes.io/managed-by=kubedb.com,app.kubernetes.io/name=mongodbs.kubedb.com for VPA demo/mg-rs
+I0621 12:52:36.805688       1 metrics_client.go:74] 25 podMetrics retrieved for all namespaces
+I0621 12:52:36.805801       1 cluster_feeder.go:467] ClusterSpec fed with #70 ContainerUsageSamples for #35 containers. Dropped #0 samples.
+I0621 12:52:36.805809       1 recommender.go:201] ClusterState is tracking 25 PodStates and 1 VPAs
+I0621 12:52:36.809993       1 workqueue.go:42] started processing, key: demo/mg-as-rs
+I0621 12:52:36.814228       1 checkpoint_writer.go:109] Saved VPA demo/mg-rs checkpoint for exporter
+I0621 12:52:36.817094       1 workqueue.go:42] started processing, key: demo/mg-as-rs
+I0621 12:52:36.822741       1 checkpoint_writer.go:109] Saved VPA demo/mg-rs checkpoint for replication-mode-detector
+I0621 12:52:36.827428       1 workqueue.go:42] started processing, key: demo/mg-as-rs
+I0621 12:52:36.827447       1 checkpoint_writer.go:109] Saved VPA demo/mg-rs checkpoint for mongodb
+I0621 12:52:36.827457       1 recommender.go:211] ClusterState is tracking 37 aggregated container states
+I0621 12:52:36.832903       1 workqueue.go:42] started processing, key: demo/mg-as-rs
+I0621 12:52:37.488576       1 compute_autoscaler.go:75] Listing VPAs for MariaDB Autoscaler
+I0621 12:52:37.488666       1 compute_autoscaler.go:77] Listing VPAs for Elasticsearch Autoscaler
+I0621 12:52:37.488751       1 compute_autoscaler.go:158] Listing VPAs for MongoDB Autoscaler
+////////////////////// Listing mongo opsrequests 0 demo
++++++++++++++ Its CurrentStorage = 2.68435456e+08, CurrentUsed = 9089 , usedPercentage = 0.0033859163522720337
+I0621 12:52:37.528864       1 decider.go:153] Container with ContainerScalingModeOff. Skipping container exporter quick OOM calculations
+I0621 12:52:37.528874       1 decider.go:153] Container with ContainerScalingModeOff. Skipping container replication-mode-detector quick OOM calculations
+I0621 12:52:37.528878       1 decider.go:128] pod accepted for update demo/mg-rs-0 with priority 0.4
+I0621 12:52:37.528883       1 calculator.go:105] updating requirements for pod mg-rs-0.
+I0621 12:52:37.531333       1 calculator.go:72] no matching recommendation found for container replication-mode-detector, using Pod request
+I0621 12:52:37.531351       1 calculator.go:72] no matching recommendation found for container exporter, using Pod request
+I0621 12:52:37.531438       1 util.go:111] InMemory =  0, in GB : 0
+***************** true mg-rs-0 -> true 0.4 -> map[cpu:{{600 -3} {<nil>} 600m DecimalSI} memory:{{629145600 0} {<nil>}  BinarySI}]
+ooooooooooooooooooooooooooooooooooooooooooooooooooooooo
+previousOnlyPodMemory =  524288000 Total PodMemory will be =  629145600 , CurrentInMemoryStorage =  2.68435456e+08
+map[cpu:{{600 -3} {<nil>} 600m DecimalSI} memory:{{629145600 0} {<nil>}  BinarySI}]  +++++  map[cpu:{{4800 -3} {<nil>}  DecimalSI} memory:{{2576979968 0} {<nil>} 2516582Ki BinarySI}]
+////////////////////// Listing mongo opsrequests 0 demo
+I0621 12:52:37.534154       1 client.go:76] Creating ops.kubedb.com/v1alpha1, Kind=MongoDBOpsRequest demo/mops-mg-rs-df6dh9.
+I0621 12:52:37.551728       1 workqueue.go:42] started processing, key: demo/mg-as-rs
+
+
+
+
+
+
+
+
+I0621 13:01:37.724421       1 compute_autoscaler.go:158] Listing VPAs for MongoDB Autoscaler
+////////////////////// Listing mongo opsrequests 3 demomops-mg-rs-3qnk0y demo - map[] - Successfulmops-mg-rs-3xs1lg demo - map[] - Successfulmops-mg-rs-df6dh9 demo - map[] - Successful
++++++++++++++ Its CurrentStorage = 2.68435456e+08, CurrentUsed = 6447 , usedPercentage = 0.002401694655418396
+I0621 13:01:37.757643       1 decider.go:153] Container with ContainerScalingModeOff. Skipping container exporter quick OOM calculations
+I0621 13:01:37.757650       1 decider.go:153] Container with ContainerScalingModeOff. Skipping container replication-mode-detector quick OOM calculations
+I0621 13:01:37.757653       1 decider.go:114] not updating a short-lived pod demo/mg-rs-0, request within recommended range
+I0621 13:01:37.758856       1 decider.go:153] Container with ContainerScalingModeOff. Skipping container exporter quick OOM calculations
+I0621 13:01:37.758862       1 decider.go:153] Container with ContainerScalingModeOff. Skipping container replication-mode-detector quick OOM calculations
+I0621 13:01:37.758865       1 decider.go:114] not updating a short-lived pod demo/mg-rs-1, request within recommended range
+I0621 13:01:37.759986       1 decider.go:153] Container with ContainerScalingModeOff. Skipping container exporter quick OOM calculations
+I0621 13:01:37.759991       1 decider.go:153] Container with ContainerScalingModeOff. Skipping container replication-mode-detector quick OOM calculations
+I0621 13:01:37.759995       1 decider.go:114] not updating a short-lived pod demo/mg-rs-2, request within recommended range
+***************** false mg-rs-2 -> false 0 -> map[]
+map[]  +++++  map[]
+I0621 13:01:37.760023       1 util.go:111] InMemory =  0, in GB : 0
+////////////////////// Listing mongo opsrequests 3 demomops-mg-rs-3qnk0y demo - map[] - Successfulmops-mg-rs-3xs1lg demo - map[] - Successfulmops-mg-rs-df6dh9 demo - map[] - Successful
+I0621 13:01:37.762779       1 client.go:76] Creating ops.kubedb.com/v1alpha1, Kind=MongoDBOpsRequest demo/mops-mg-rs-7gu4t7.
+I0621 13:01:37.778536       1 workqueue.go:42] started processing, key: demo/mg-as-rs
+I0621 13:02:37.165708       1 recommender.go:191] Recommender Run
++++++++++++++++++++++++++ Listing VPAs
+mg-rs mg-as-rs MongoDBAutoscaler
+I0621 13:02:37.169070       1 cluster_feeder.go:353] Start selecting the vpaCRDs.
+I0621 13:02:37.169076       1 cluster_feeder.go:376] Fetched 1 VPAs.
+I0621 13:02:37.169122       1 cluster_feeder.go:387] Using selector app.kubernetes.io/instance=mg-rs,app.kubernetes.io/managed-by=kubedb.com,app.kubernetes.io/name=mongodbs.kubedb.com for VPA demo/mg-rs
+
+
+
+
+I0621 13:07:37.912872       1 compute_autoscaler.go:158] Listing VPAs for MongoDB Autoscaler
+////////////////////// Listing mongo opsrequests 5 demomops-mg-rs-3qnk0y demo - map[] - Successfulmops-mg-rs-3xs1lg demo - map[] - Successfulmops-mg-rs-7gu4t7 demo - map[] - Successfulmops-mg-rs-df6dh9 demo - map[] - Successfulmops-mg-rs-vy07w1 demo - map[] - Successful
++++++++++++++ Its CurrentStorage = 2.68435456e+08, CurrentUsed = 6344 , usedPercentage = 0.0023633241653442383
+I0621 13:07:37.950870       1 decider.go:153] Container with ContainerScalingModeOff. Skipping container exporter quick OOM calculations
+I0621 13:07:37.950878       1 decider.go:153] Container with ContainerScalingModeOff. Skipping container replication-mode-detector quick OOM calculations
+I0621 13:07:37.950881       1 decider.go:114] not updating a short-lived pod demo/mg-rs-0, request within recommended range
+I0621 13:07:37.952006       1 decider.go:153] Container with ContainerScalingModeOff. Skipping container exporter quick OOM calculations
+I0621 13:07:37.952012       1 decider.go:153] Container with ContainerScalingModeOff. Skipping container replication-mode-detector quick OOM calculations
+I0621 13:07:37.952016       1 decider.go:114] not updating a short-lived pod demo/mg-rs-1, request within recommended range
+I0621 13:07:37.953108       1 decider.go:153] Container with ContainerScalingModeOff. Skipping container exporter quick OOM calculations
+***************** false mg-rs-2 -> false 0 -> map[]
+map[]  +++++  map[]
+I0621 13:07:37.953115       1 decider.go:153] Container with ContainerScalingModeOff. Skipping container replication-mode-detector quick OOM calculations
+I0621 13:07:37.953118       1 decider.go:114] not updating a short-lived pod demo/mg-rs-2, request within recommended range
+I0621 13:07:37.953147       1 util.go:111] InMemory =  0, in GB : 0
+////////////////////// Listing mongo opsrequests 5 demomops-mg-rs-3qnk0y demo - map[] - Successfulmops-mg-rs-3xs1lg demo - map[] - Successfulmops-mg-rs-7gu4t7 demo - map[] - Successfulmops-mg-rs-df6dh9 demo - map[] - Successfulmops-mg-rs-vy07w1 demo - map[] - Successful
+I0621 13:07:37.956522       1 client.go:76] Creating ops.kubedb.com/v1alpha1, Kind=MongoDBOpsRequest demo/mops-mg-rs-r88ou9.
+I0621 13:07:37.970856       1 workqueue.go:42] started processing, key: demo/mg-as-rs
+
+
+
+
+IMPORTANT
+
+I0621 13:34:51.925475       1 recommender.go:191] Recommender Run
++++++++++++++++++++++++++ Listing VPAs
+mg-rs mg-as-rs MongoDBAutoscaler
+I0621 13:34:51.932193       1 cluster_feeder.go:353] Start selecting the vpaCRDs.
+I0621 13:34:51.932199       1 cluster_feeder.go:376] Fetched 1 VPAs.
+I0621 13:34:51.932246       1 cluster_feeder.go:387] Using selector app.kubernetes.io/instance=mg-rs,app.kubernetes.io/managed-by=kubedb.com,app.kubernetes.io/name=mongodbs.kubedb.com for VPA demo/mg-rs
+I0621 13:34:51.938648       1 metrics_client.go:74] 25 podMetrics retrieved for all namespaces
+I0621 13:34:51.938762       1 cluster_feeder.go:467] ClusterSpec fed with #70 ContainerUsageSamples for #35 containers. Dropped #0 samples.
+I0621 13:34:51.938771       1 recommender.go:201] ClusterState is tracking 25 PodStates and 1 VPAs
+I0621 13:34:51.944829       1 checkpoint_writer.go:109] Saved VPA demo/mg-rs checkpoint for replication-mode-detector
+I0621 13:34:51.944971       1 workqueue.go:42] started processing, key: demo/mg-as-rs
+I0621 13:34:51.984854       1 checkpoint_writer.go:109] Saved VPA demo/mg-rs checkpoint for exporter
+I0621 13:34:51.988669       1 workqueue.go:42] started processing, key: demo/mg-as-rs
+I0621 13:34:51.990643       1 checkpoint_writer.go:109] Saved VPA demo/mg-rs checkpoint for mongodb
+I0621 13:34:51.990660       1 recommender.go:211] ClusterState is tracking 85 aggregated container states
+I0621 13:34:51.996610       1 workqueue.go:42] started processing, key: demo/mg-as-rs
+I0621 13:34:52.277498       1 compute_autoscaler.go:75] Listing VPAs for MariaDB Autoscaler
+I0621 13:34:52.277507       1 compute_autoscaler.go:77] Listing VPAs for Elasticsearch Autoscaler
+I0621 13:34:52.610182       1 compute_autoscaler.go:158] Listing VPAs for MongoDB Autoscaler
+////////////////////// Listing mongo opsrequests 3 demomops-mg-rs-mm0fm9 demo - map[] - Successfulmops-mg-rs-oi8dit demo - map[] - Successfulmops-mg-rs-xfmhor demo - map[] - Successful
++++++++++++++ Its CurrentStorage = 2.68435456e+08, CurrentUsed = 6550 , usedPercentage = 0.0024400651454925537
+I0621 13:34:52.656367       1 decider.go:153] Container with ContainerScalingModeOff. Skipping container exporter quick OOM calculations
+I0621 13:34:52.656374       1 decider.go:153] Container with ContainerScalingModeOff. Skipping container replication-mode-detector quick OOM calculations
+I0621 13:34:52.656378       1 decider.go:114] not updating a short-lived pod demo/mg-rs-0, request within recommended range
+I0621 13:34:52.657599       1 decider.go:153] Container with ContainerScalingModeOff. Skipping container exporter quick OOM calculations
+I0621 13:34:52.657606       1 decider.go:153] Container with ContainerScalingModeOff. Skipping container replication-mode-detector quick OOM calculations
+I0621 13:34:52.657609       1 decider.go:114] not updating a short-lived pod demo/mg-rs-1, request within recommended range
+I0621 13:34:52.658790       1 decider.go:153] Container with ContainerScalingModeOff. Skipping container exporter quick OOM calculations
+I0621 13:34:52.658796       1 decider.go:153] Container with ContainerScalingModeOff. Skipping container replication-mode-detector quick OOM calculations
+I0621 13:34:52.658799       1 decider.go:114] not updating a short-lived pod demo/mg-rs-2, request within recommended range
+***************** false mg-rs-2 -> false 0 -> map[]
+map[]  +++++  map[]
+I0621 13:34:52.658828       1 util.go:112] InMemory =  0, in GB : 0
+////////////////////// Listing mongo opsrequests 3 demomops-mg-rs-mm0fm9 demo - map[] - Successfulmops-mg-rs-oi8dit demo - map[] - Successfulmops-mg-rs-xfmhor demo - map[] - Successful
+I0621 13:34:52.661273       1 client.go:76] Creating ops.kubedb.com/v1alpha1, Kind=MongoDBOpsRequest demo/mops-mg-rs-6mmeq5.
+I0621 13:34:52.680435       1 workqueue.go:42] started processing, key: demo/mg-as-rs

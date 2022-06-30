@@ -17,6 +17,7 @@ spec:
         cpu: 1
         memory: 1Gi
       controlledResources: ["cpu", "memory"]
+      containerControlledValues: "RequestsAndLimits"
     configServer:
       trigger: "On"
       podLifeTimeThreshold: 5m
@@ -24,6 +25,7 @@ spec:
         cpu: 400m
         memory: 400Mi
       maxAllowed:
-        cpu: 1
-        memory: 1Gi
+        cpu: 2
+        memory: 2Gi
       controlledResources: [ "cpu", "memory" ]
+      containerControlledValues: "RequestsAndLimits"

@@ -2,6 +2,7 @@ package controller_fetcher
 
 import (
 	apimeta "k8s.io/apimachinery/pkg/api/meta"
+	"k8s.io/apimachinery/pkg/runtime/schema"
 	"k8s.io/client-go/scale"
 	"k8s.io/client-go/tools/cache"
 )
@@ -43,3 +44,23 @@ FindTopMostWellKnownOrScalable
 
 Going into details seems not necessary
 */
+
+func (f *controllerFetcher) isWellKnown(key *ControllerKeyWithAPIVersion) bool {
+	// check if f.informersMap contains key.Controller.Kind
+	return false
+}
+
+func (f *controllerFetcher) isWellKnownOrScalable(key *ControllerKeyWithAPIVersion) bool {
+	// if inWellKnown() , return true
+	// Get the RestMappings for this groupKind from f.mapper
+	// f.getScaleForResources()
+	return false
+}
+
+func (f *controllerFetcher) getOwnerForScaleResource(groupKind schema.GroupKind, namespace, name string) (*ControllerKeyWithAPIVersion, error) {
+	return nil, nil
+}
+
+func (f *controllerFetcher) FindTopMostWellKnownOrScalable(key *ControllerKeyWithAPIVersion) (*ControllerKeyWithAPIVersion, error) {
+	return nil, nil
+}

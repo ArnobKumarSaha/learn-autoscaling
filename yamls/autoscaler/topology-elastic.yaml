@@ -18,3 +18,13 @@ spec:
           cpu: 2
           memory: 3Gi
         controlledResources: ["cpu", "memory"]
+      data:
+        trigger: "On"
+        podLifeTimeThreshold: 5m
+        minAllowed:
+          cpu: 1
+          memory: 2Gi
+        maxAllowed:
+          cpu: 2
+          memory: 3Gi
+        controlledResources: [ "cpu", "memory" ]
