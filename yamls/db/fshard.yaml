@@ -1,0 +1,67 @@
+apiVersion: kubedb.com/v1alpha2
+kind: MongoDB
+metadata:
+  name: mg-sh
+  namespace: demo
+spec:
+  version: "percona-4.4.10"
+  storageEngine: inMemory
+  shardTopology:
+    configServer:
+      replicas: 3
+      podTemplate:
+        spec:
+          resources:
+            requests:
+              cpu: "10m"
+              memory: "10Mi"
+            limits:
+              cpu: "4"
+              memory: "4Gi"
+    mongos:
+      replicas: 2
+      podTemplate:
+        spec:
+          resources:
+            requests:
+              cpu: "10m"
+              memory: "10Mi"
+            limits:
+              cpu: "1"
+              memory: "1Gi"
+    shard:
+      configSecret:
+        name: shard-config
+      replicas: 3
+      shards: 2
+      podTemplate:
+        spec:
+          resources:
+            requests:
+              cpu: "10m"
+              memory: "10Mi"
+            limits:
+              cpu: "4"
+              memory: "2Gi"
+  storageType: Ephemeral
+  monitor:
+    agent: prometheus.io/operator
+    prometheus:
+      exporter:
+        args:
+          - --compatible-mode
+      serviceMonitor:
+        labels:
+          release: prometheus
+        interval: 10s
+  terminationPolicy: WipeOut
+
+# utilgo -> reducePodMem
+# klog.Infof("+++++ pod %v memory request = %v , percent = %v \n", pod.Name, container.Resources.Requests.Memory().Value(), percent)
+
+# util.go -> calc
+# klog.Infof("mainContainer memory request %v limit %v , nxtReq %v nxtLimit %v \n", prevReq, prevLimit, nxtReq, nxtLimit)
+
+# decider.go
+# klog.Infof("=> %v %v \n", updateChecker.OutsideRecommendedRange, quickOOM)
+# klog.Infof("1... %v %v %v %v \n", resourceName, request.Value(), lowerBound.Value(), upperBound.Value())
