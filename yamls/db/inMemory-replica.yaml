@@ -17,10 +17,17 @@ spec:
         limits:
           cpu: "4"
           memory: "2Gi"
-#  configSecret:
-#    name: inmemory-config
+  configSecret:
+    name: inmemory-config
   storageEngine: inMemory
   storageType: Ephemeral
+  sslMode: requireSSL
+  tls:
+    issuerRef:
+      apiGroup: "cert-manager.io"
+      kind: Issuer
+      name: mongo-ca-issuer
+  clusterAuthMode: x509
   monitor:
     agent: prometheus.io/operator
     prometheus:
