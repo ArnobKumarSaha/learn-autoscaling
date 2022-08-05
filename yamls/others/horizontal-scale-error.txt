@@ -1,0 +1,36 @@
+panic: runtime error: invalid memory address or nil pointer dereference
+[signal SIGSEGV: segmentation violation code=0x1 addr=0x20 pc=0xcb359d]
+
+goroutine 2130 [running]:
+golang.org/x/time/rate.(*Limiter).WaitN(0xc000eb5e50, {0x0, 0x0}, 0x1)
+	/src/vendor/golang.org/x/time/rate/rate.go:236 +0x1bd
+golang.org/x/time/rate.(*Limiter).Wait(...)
+	/src/vendor/golang.org/x/time/rate/rate.go:218
+k8s.io/client-go/util/flowcontrol.(*tokenBucketRateLimiter).Wait(0x16?, {0x0?, 0x0?})
+	/src/vendor/k8s.io/client-go/util/flowcontrol/throttle.go:131 +0x2b
+k8s.io/client-go/rest.(*Request).tryThrottleWithInfo(0xc00039a500, {0x0, 0x0}, {0x0, 0x0})
+	/src/vendor/k8s.io/client-go/rest/request.go:518 +0xba
+k8s.io/client-go/rest.(*Request).tryThrottle(...)
+	/src/vendor/k8s.io/client-go/rest/request.go:546
+k8s.io/client-go/rest.(*Request).request(0xc00039a500, {0x0, 0x0}, 0x0?)
+	/src/vendor/k8s.io/client-go/rest/request.go:849 +0x216
+k8s.io/client-go/rest.(*Request).Do(0xc00039a500, {0x0, 0x0})
+	/src/vendor/k8s.io/client-go/rest/request.go:924 +0xc9
+sigs.k8s.io/controller-runtime/pkg/client.(*typedClient).Get(0xc002e11a00?, {0x0, 0x0}, {{0xc003d15de8?, 0xc?}, {0xc003686036?, 0x3?}}, {0x5374cd0?, 0xc00440c780})
+	/src/vendor/sigs.k8s.io/controller-runtime/pkg/client/typed_client.go:143 +0x17d
+sigs.k8s.io/controller-runtime/pkg/client.(*client).Get(0xc003686250?, {0x0?, 0x0?}, {{0xc003d15de8?, 0xc0027a5ac0?}, {0xc003686036?, 0x7?}}, {0x5374cd0?, 0xc00440c780?})
+	/src/vendor/sigs.k8s.io/controller-runtime/pkg/client/client.go:253 +0x2d1
+kubedb.dev/db-client-go/mongodb.(*KubeDBClientBuilder).getMongoDBRootCredentials(0xc004231d08)
+	/src/vendor/kubedb.dev/db-client-go/mongodb/kubedb_client_builder.go:197 +0x9b
+kubedb.dev/db-client-go/mongodb.(*KubeDBClientBuilder).getMongoDBClientOpts(0xc004231d08)
+	/src/vendor/kubedb.dev/db-client-go/mongodb/kubedb_client_builder.go:144 +0x90
+kubedb.dev/db-client-go/mongodb.(*KubeDBClientBuilder).GetMongoClient(0xc004231d08)
+	/src/vendor/kubedb.dev/db-client-go/mongodb/kubedb_client_builder.go:103 +0x20d
+kubedb.dev/ops-manager/pkg/controller/mongodb.(*mongoOpsReqController).numOfReplicas(0xc002aeeb00, {0xc00385e3c0, 0x9e})
+	/src/pkg/controller/mongodb/database.go:433 +0x1c5
+kubedb.dev/ops-manager/pkg/controller/mongodb.(*scaleUpReplicasetFunc).run(0xc001cdd140)
+	/src/pkg/controller/mongodb/horizontal_scaling_replicaset.go:87 +0x119
+kubedb.dev/ops-manager/pkg/controller/mongodb.(*mongoOpsReqController).RunParallel.func1()
+	/src/pkg/controller/mongodb/parallel.go:62 +0x156
+created by kubedb.dev/ops-manager/pkg/controller/mongodb.(*mongoOpsReqController).RunParallel
+	/src/pkg/controller/mongodb/parallel.go:55 +0x2aa

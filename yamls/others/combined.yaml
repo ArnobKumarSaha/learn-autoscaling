@@ -1,0 +1,63 @@
+apiVersion: ops.kubedb.com/v1alpha1
+kind: MongoDBOpsRequest
+metadata:
+  name: vertical
+  namespace: demo
+spec:
+  databaseRef:
+    name: mg-rs
+  type: VerticalScaling
+  verticalScaling:
+    replicaSet:
+      limits:
+        cpu: 4800m
+        memory: 2516582Ki
+      requests:
+        cpu: 600m
+        memory: 600Mi
+
+---
+apiVersion: ops.kubedb.com/v1alpha1
+kind: MongoDBOpsRequest
+metadata:
+  name: mops-mg-rs-config
+  namespace: demo
+spec:
+  configuration:
+    replicaSet:
+      inlineConfig: |-
+        storage:
+          engine: inMemory
+          inMemory:
+            engineConfig:
+              inMemorySizeGB: 0.375
+  databaseRef:
+    name: mg-rs
+  type: VerticalScaling
+  verticalScaling:
+    replicaSet:
+      limits:
+        cpu: 4800m
+        memory: 3053452Ki
+      requests:
+        cpu: 600m
+        memory: 728Mi
+---
+apiVersion: ops.kubedb.com/v1alpha1
+kind: MongoDBOpsRequest
+metadata:
+  name: mops-mg-rs-only
+  namespace: demo
+spec:
+  databaseRef:
+    name: mg-rs
+  type: VerticalScaling
+  verticalScaling:
+    replicaSet:
+      limits:
+        cpu: 4800m
+        memory: 3682930Ki
+      requests:
+        cpu: 600m
+        memory: 899153Ki
+---

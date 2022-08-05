@@ -1,0 +1,22 @@
+
+ mongo --ipv6 --host localhost --tls --tlsCAFile /var/run/mongodb/tls/ca.crt --tlsCertificateKeyFile /var/run/mongodb/tls/mongo.pem -u root -p "$MONGO_INITDB_ROOT_PASSWORD"
+
+mongo -u root -p "$MONGO_INITDB_ROOT_PASSWORD"
+=> admin prom-operator
+
+db.serverStatus().inMemory.cache["bytes currently in the cache"]
+db.serverStatus().inMemory.cache["maximum bytes configured"]
+
+pod-recommendation-min-memory-mb
+
+////////////
+rs.status()
+db._adminCommand({getCmdLineOpts: 1})
+db.products.insertOne({"hunny": "bunny"})
+
+
+
+
+////////////
+very important :: autoscale er db apply dewar aage obossoi 
+config-secret theke comment sorano.

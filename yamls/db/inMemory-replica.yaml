@@ -10,15 +10,22 @@ spec:
     name: "rs1"
   podTemplate:
     spec:
+#      volumes:
+#        - name: hello
+#          secret:
+#            secretName: test-secret
+#      volumeMounts:
+#        - name: hello
+#          mountPath: /data/configdb-db
       resources:
         requests:
           cpu: "500m"
-          memory: "500Mi"
+          memory: "256Mi"
         limits:
           cpu: "4"
-          memory: "2Gi"
-  configSecret:
-    name: inmemory-config
+#          memory: "2Gi"
+#  configSecret:
+#    name: inmemory-config
   storageEngine: inMemory
   storageType: Ephemeral
   sslMode: requireSSL
