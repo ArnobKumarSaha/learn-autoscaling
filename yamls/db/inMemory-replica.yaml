@@ -35,16 +35,16 @@ spec:
       kind: Issuer
       name: mongo-ca-issuer
   clusterAuthMode: x509
-  monitor:
-    agent: prometheus.io/operator
-    prometheus:
-      exporter:
-        args:
-          - --compatible-mode
-      serviceMonitor:
-        labels:
-          release: prometheus
-        interval: 10s
+#  monitor:
+#    agent: prometheus.io/operator
+#    prometheus:
+#      exporter:
+#        args:
+#          - --compatible-mode
+#      serviceMonitor:
+#        labels:
+#          release: prometheus
+#        interval: 10s
   terminationPolicy: WipeOut
 
 # The name has to be mongod.conf

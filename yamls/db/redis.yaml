@@ -1,0 +1,32 @@
+apiVersion: kubedb.com/v1alpha2
+kind: Redis
+metadata:
+  name: rdc
+  namespace: demo
+spec:
+  version: 6.2.7
+  # mode: Cluster
+  # cluster:
+  #   master: 3
+  #   replicas: 1
+  mode: Standalone
+  # mode: Sentinel
+  # replicas: 3
+  # sentinelRef: 
+  #   name: sentinel
+  #   namespace: demo
+  storageType: Durable
+  storage:
+    resources:
+      requests:
+        storage: 1Gi
+    storageClassName: "standard"
+    accessModes:
+      - ReadWriteOnce
+  podTemplate:
+    spec:
+      resources:
+        requests:
+          cpu: "400m"
+          memory: "400Mi"
+  terminationPolicy: WipeOut

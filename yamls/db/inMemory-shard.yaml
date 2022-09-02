@@ -30,8 +30,8 @@ spec:
               cpu: "1"
               memory: "1Gi"
     shard:
-      configSecret:
-        name: inmemory-config
+      # configSecret:
+      #   name: inmemory-config
       replicas: 3
       shards: 2
       podTemplate:
@@ -44,16 +44,16 @@ spec:
               cpu: "4"
               memory: "2Gi"
   storageType: Ephemeral
-  monitor:
-    agent: prometheus.io/operator
-    prometheus:
-      exporter:
-        args:
-          - --compatible-mode
-      serviceMonitor:
-        labels:
-          release: prometheus
-        interval: 10s
+  # monitor:
+  #   agent: prometheus.io/operator
+  #   prometheus:
+  #     exporter:
+  #       args:
+  #         - --compatible-mode
+  #     serviceMonitor:
+  #       labels:
+  #         release: prometheus
+  #       interval: 10s
   terminationPolicy: WipeOut
 
 # kubectl create secret generic -n demo inmemory-config --from-file=./inmemory-config
