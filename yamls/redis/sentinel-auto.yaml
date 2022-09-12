@@ -1,16 +1,16 @@
 apiVersion: autoscaling.kubedb.com/v1alpha1
-kind: RedisAutoscaler
+kind: RedisSentinelAutoscaler
 metadata:
   name: rda
   namespace: demo
 spec:
   databaseRef:
-    name: rdc
+    name: sentinel
   opsRequestOptions:
     apply: IfReady
     timeout: 5m
   compute:
-    standalone: # standalone / cluster
+    sentinel: 
       trigger: "On"
       podLifeTimeThreshold: 5m
       minAllowed:
@@ -20,3 +20,8 @@ spec:
         cpu: 1
         memory: 1Gi
       controlledResources: ["cpu", "memory"]
+  # storage:
+  #   sentinel:
+  #     trigger: "On"
+  #     usageThreshold: 60
+  #     scalingThreshold: 50

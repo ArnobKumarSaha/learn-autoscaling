@@ -1,0 +1,12 @@
+apiVersion: ops.kubedb.com/v1alpha1
+kind: RedisSentinelOpsRequest
+metadata:
+  name: expansion
+  namespace: demo
+spec:
+  databaseRef:
+    name: sentinel
+  type: VolumeExpansion
+  volumeExpansion:
+    mode: Online
+    redissentinel: 12Gi

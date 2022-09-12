@@ -23,7 +23,7 @@ spec:
     resources:
       requests:
         storage: 500Mi
-    storageClassName: "standard"
+    storageClassName: "standard" # "linode-block-storage"
     accessModes:
     - ReadWriteOnce
   terminationPolicy: WipeOut

@@ -11,12 +11,12 @@ spec:
       trigger: "On"
       podLifeTimeThreshold: 3m
       minAllowed:
-        cpu: 600m
-        memory: 200Mi
+        cpu: 540m
+        memory: 256Mi
       maxAllowed:
         cpu: 1
         memory: 1Gi
-#      controlledResources: ["cpu", "memory"]
+      controlledResources: ["cpu"]
       inMemoryStorage:
         usageThresholdPercentage: 70
         scalingFactorPercentage: 50

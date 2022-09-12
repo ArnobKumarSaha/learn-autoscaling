@@ -1,0 +1,27 @@
+apiVersion: autoscaling.kubedb.com/v1alpha1
+kind: RedisAutoscaler
+metadata:
+  name: rda
+  namespace: demo
+spec:
+  databaseRef:
+    name: rdc
+  opsRequestOptions:
+    apply: IfReady
+    timeout: 5m
+  # compute:
+  #   standalone: # standalone / cluster / sentinel
+  #     trigger: "On"
+  #     podLifeTimeThreshold: 5m
+  #     minAllowed:
+  #       cpu: 600m
+  #       memory: 600Mi
+  #     maxAllowed:
+  #       cpu: 1
+  #       memory: 1Gi
+  #     controlledResources: ["cpu", "memory"]
+  storage:
+    cluster:
+      trigger: "On"
+      usageThreshold: 25
+      scalingThreshold: 20

@@ -28,13 +28,13 @@ spec:
 #    name: inmemory-config
   storageEngine: inMemory
   storageType: Ephemeral
-  sslMode: requireSSL
-  tls:
-    issuerRef:
-      apiGroup: "cert-manager.io"
-      kind: Issuer
-      name: mongo-ca-issuer
-  clusterAuthMode: x509
+  # sslMode: requireSSL
+  # tls:
+  #   issuerRef:
+  #     apiGroup: "cert-manager.io"
+  #     kind: Issuer
+  #     name: mongo-ca-issuer
+  # clusterAuthMode: x509
 #  monitor:
 #    agent: prometheus.io/operator
 #    prometheus:

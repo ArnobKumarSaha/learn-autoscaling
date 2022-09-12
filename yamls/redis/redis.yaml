@@ -5,22 +5,23 @@ metadata:
   namespace: demo
 spec:
   version: 6.2.7
-  # mode: Cluster
-  # cluster:
-  #   master: 3
-  #   replicas: 1
-  mode: Standalone
+  mode: Cluster
+  cluster:
+    master: 3
+    replicas: 1
+  # mode: Standalone
   # mode: Sentinel
   # replicas: 3
   # sentinelRef: 
   #   name: sentinel
   #   namespace: demo
-  storageType: Durable
+  # storageType: Durable
   storage:
     resources:
       requests:
         storage: 1Gi
-    storageClassName: "standard"
+    storageClassName: "linode-block-storage"
+    # storageClassName: "standard"
     accessModes:
       - ReadWriteOnce
   podTemplate:
