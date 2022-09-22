@@ -1,0 +1,31 @@
+apiVersion: kubedb.com/v1alpha2
+kind: Postgres
+metadata:
+  name: postgres
+  namespace: demo
+spec:
+  version: "13.2"
+  replicas: 3
+  standbyMode: Hot
+  storageType: Durable
+  storage:
+    # storageClassName: "standard"
+    # storageClassName: "linode-block-storage"
+    storageClassName: "longhorn"
+    accessModes:
+    - ReadWriteOnce
+    resources:
+      requests:
+        storage: 1Gi
+  monitor:
+    agent: prometheus.io/operator
+    prometheus:
+      serviceMonitor:
+        labels:
+          release: prometheus
+        interval: 10s
+
+# 100 - 100 * (
+#   kubelet_volume_stats_available_bytes{namespace="demo",persistentvolumeclaim="data-postgres-0"} / 
+#   kubelet_volume_stats_capacity_bytes{namespace="demo",persistentvolumeclaim="data-postgres-0"}
+# )

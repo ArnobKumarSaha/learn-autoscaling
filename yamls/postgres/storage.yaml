@@ -1,0 +1,14 @@
+apiVersion: autoscaling.kubedb.com/v1alpha1
+kind: PostgresAutoscaler
+metadata:
+  name: my-compute
+  namespace: demo
+spec:
+  databaseRef:
+    name: postgres
+  storage:
+    postgres:
+      trigger: "On"
+      usageThreshold: 30
+      expansionMode: "Offline"
+

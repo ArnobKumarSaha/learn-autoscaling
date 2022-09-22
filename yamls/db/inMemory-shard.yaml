@@ -4,7 +4,7 @@ metadata:
   name: mg-sh
   namespace: demo
 spec:
-  version: "percona-4.4.10"
+  version: "percona-4.0.10"
   storageEngine: inMemory
   shardTopology:
     configServer:
@@ -33,7 +33,7 @@ spec:
       # configSecret:
       #   name: inmemory-config
       replicas: 3
-      shards: 2
+      shards: 4
       podTemplate:
         spec:
           resources:

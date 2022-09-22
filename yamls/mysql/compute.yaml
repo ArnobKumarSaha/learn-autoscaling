@@ -1,0 +1,22 @@
+apiVersion: autoscaling.kubedb.com/v1alpha1
+kind: MySQLAutoscaler
+metadata:
+  name: my-compute
+  namespace: demo
+spec:
+  databaseRef:
+    name: group
+  compute:
+    mysql:
+      trigger: "On"
+      podLifeTimeThreshold: 3m
+      minAllowed:
+        cpu: 540m
+        memory: 256Mi
+      maxAllowed:
+        cpu: 1
+        memory: 1Gi
+      controlledResources: ["cpu"]
+      inMemoryStorage:
+        usageThresholdPercentage: 70
+        scalingFactorPercentage: 50

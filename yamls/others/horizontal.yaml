@@ -1,0 +1,13 @@
+apiVersion: ops.kubedb.com/v1alpha1
+kind: MongoDBOpsRequest
+metadata:
+  name: horizontal
+  namespace: demo
+spec:
+  databaseRef:
+    name: mg-sh
+  type: HorizontalScaling
+  horizontalScaling:
+    shard: 
+      shards: 4
+      replicas: 3

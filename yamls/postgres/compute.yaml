@@ -1,0 +1,19 @@
+apiVersion: autoscaling.kubedb.com/v1alpha1
+kind: PostgresAutoscaler
+metadata:
+  name: my-compute
+  namespace: demo
+spec:
+  databaseRef:
+    name: postgres
+  compute:
+    postgres:
+      trigger: "On"
+      podLifeTimeThreshold: 3m
+      minAllowed:
+        cpu: 540m
+        memory: 256Mi
+      maxAllowed:
+        cpu: 1
+        memory: 1Gi
+      controlledResources: ["cpu"]
