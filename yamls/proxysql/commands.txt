@@ -1,0 +1,38 @@
+export MYSQL_TAG=v0.22.0-1-gb5b8cadd_linux_amd64
+make install-mysql deploy-to-kind
+
+
+<exec into mysql pod>
+root@my-group-0:/# mysql -u root -p"$MYSQL_ROOT_PASSWORD" 
+
+mysql> create user 'test'@'%' identified by 'test';
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> grant all privileges on *.* to 'test'@'%';
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> flush privileges;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> create database ok;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> use ok;
+Database changed
+
+mysql> create table okok(name varchar(50), primary key(name));
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> select * FROM okok;
+<all data, inserted by script>
+
+
+
+
+<exec into proxy pod>
+mysql -u admin -padmin -h 127.0.0.1 -P 6032 
+select * from mysql_users;
+
+
+<exec into ubuntu pod>
+apt install mysql-client nano

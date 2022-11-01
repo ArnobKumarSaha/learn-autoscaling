@@ -16,7 +16,7 @@ spec:
     - ReadWriteOnce
     resources:
       requests:
-        storage: 1Gi
+        storage: 2Gi
   monitor:
     agent: prometheus.io/operator
     prometheus:

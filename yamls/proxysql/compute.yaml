@@ -1,0 +1,25 @@
+apiVersion: autoscaling.kubedb.com/v1alpha1
+kind: ProxySQLAutoscaler
+metadata:
+  name: compute
+  namespace: demo
+spec:
+  databaseRef:
+    name: my-proxy
+  compute:
+    proxysql:
+      trigger: "On"
+      podLifeTimeThreshold: 3m
+      resourceDiffPercentage: 30
+      minAllowed:
+        cpu: 700m
+        memory: 1.2Gi
+      maxAllowed:
+        cpu: 1
+        memory: 1.5Gi
+      controlledResources: ["cpu", "memory"]
+      containerControlledValues: RequestsAndLimits
+  opsRequestOptions:
+    timeout: 5m
+    apply: IfReady
+

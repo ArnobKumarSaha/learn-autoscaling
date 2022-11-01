@@ -1,0 +1,14 @@
+apiVersion: ops.kubedb.com/v1alpha1
+kind: PostgresOpsRequest
+metadata:
+  name: exp
+  namespace: demo
+spec:
+  type: VolumeExpansion
+  databaseRef:
+    name: postgres
+  volumeExpansion:
+    postgres: 1.5Gi
+    mode: "Offline"
+  timeout: 10m
+  apply: IfReady

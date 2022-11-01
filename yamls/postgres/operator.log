@@ -1,0 +1,9 @@
+   1 storage_metrics.go:96] +++++++++++++ data-postgres-0 13.644813284672125
+I0923 05:38:12.947760       1 storage_metrics.go:96] +++++++++++++ data-postgres-1 11.998883843432935
+I0923 05:38:12.951769       1 storage_metrics.go:96] +++++++++++++ data-postgres-2 10.35395814011379
+
+
+pgops-postgres-d1o9v1 {DatabaseRef:{Name:postgres} Type:VolumeExpansion 
+Upgrade:<nil> HorizontalScaling:<nil> VerticalScaling:<nil> VolumeExpansion:0xc001726890 Configuration:<nil> TLS:<nil> Restart:<nil> Timeout:nil Apply:IfReady}
+pgops-postgres-t3tiv1 {DatabaseRef:{Name:postgres} Type:VolumeExpansion 
+Upgrade:<nil> HorizontalScaling:<nil> VerticalScaling:<nil> VolumeExpansion:0xc002430b40 Configuration:<nil> TLS:<nil> Restart:<nil> Timeout:nil Apply:}

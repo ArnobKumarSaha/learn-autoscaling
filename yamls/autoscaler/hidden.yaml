@@ -1,0 +1,28 @@
+apiVersion: autoscaling.kubedb.com/v1alpha1
+kind: MongoDBAutoscaler
+metadata:
+  name: mg-as-rs
+  namespace: demo
+spec:
+  databaseRef:
+    name: mongo
+  compute:
+    hidden:
+      trigger: "On"
+      podLifeTimeThreshold: 3m
+      minAllowed:
+        cpu: 540m
+        memory: 256Mi
+      maxAllowed:
+        cpu: 1
+        memory: 1Gi
+      controlledResources: ["cpu", "memory"]
+      inMemoryStorage:
+        usageThresholdPercentage: 70
+        scalingFactorPercentage: 50
+  # storage:
+  #   hidden:
+  #     trigger: "On"
+  #     usageThreshold: 30
+  #     scalingThreshold: 40
+  #     expansionMode: "Online"
