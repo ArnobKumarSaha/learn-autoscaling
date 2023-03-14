@@ -23,6 +23,13 @@ spec:
           cpu: "200m"
           memory: "300Mi"
   terminationPolicy: WipeOut
+  monitor:
+    agent: prometheus.io/operator
+    prometheus:
+      serviceMonitor:
+        labels:
+          release: prometheus
+        interval: 10s
 
 #apiVersion: kubedb.com/v1alpha2
 #kind: MongoDB

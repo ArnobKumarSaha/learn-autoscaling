@@ -23,11 +23,11 @@ spec:
         limits:
           cpu: "200m"
           memory: "300Mi"
-  # monitor:
-  #   agent: prometheus.io/operator
-  #   prometheus:
-  #     serviceMonitor:
-  #       labels:
-  #         release: prometheus
-  #       interval: 10s
+  monitor:
+    agent: prometheus.io/operator
+    prometheus:
+      serviceMonitor:
+        labels:
+          release: prometheus
+        interval: 10s
   terminationPolicy: WipeOut

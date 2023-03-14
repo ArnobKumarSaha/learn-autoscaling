@@ -1,0 +1,12 @@
+apiVersion: ops.kubedb.com/v1alpha1
+kind: MySQLOpsRequest
+metadata:
+  name: upgrade-my
+  namespace: demo
+spec:
+  type: Upgrade
+  databaseRef:
+    name: group
+  upgrade:
+    targetVersion: 8.0.31
+  apply: IfReady

@@ -1,0 +1,13 @@
+apiVersion: ops.kubedb.com/v1alpha1
+kind: MongoDBOpsRequest
+metadata:
+  name: update
+  namespace: demo
+spec:
+  type: UpdateVersion
+  databaseRef:
+    name: mg-rs
+  updateVersion:
+    targetVersion: 5.0.3
+  apply: IfReady
+
